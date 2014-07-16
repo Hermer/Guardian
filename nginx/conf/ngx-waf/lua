@@ -1,9 +1,9 @@
 if (ngx.req.get_method()=="GET") then
 	local data=ngx.location.capture("/proxy")
 	if data.status == 200 or data.status == 304 then
-	
+
 		local d2 = data.body
-		
+
 		for k,v in pairs(data.header) do
 			ngx.header[k]=v
 		end
@@ -21,4 +21,4 @@ if (ngx.req.get_method()=="GET") then
 	end
 else
 	ngx.exec("/proxy");
-end;
+end
