@@ -1,0 +1,16 @@
+RulePath = "/usr/local/openresty/nginx/conf/ngx-waf/wafconf/"
+attacklog = "on"
+logdir = "/usr/local/ngx-waf/logs/hack/"
+UrlDeny="on"
+Redirect="on"
+CookieMatch="on"
+postMatch="on" 
+whiteModule="on" 
+ipWhitelist={}
+ipBlocklist={"1.0.0.1"}
+CCDeny="on"
+CCrate="100/60"
+closeWebDav="on"
+compressJS="off"
+compressCSS="off"
+html=[[8888~~ ]]

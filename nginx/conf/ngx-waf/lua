@@ -1,0 +1,24 @@
+if (ngx.req.get_method()=="GET") then
+	local data=ngx.location.capture("/proxy")
+	if data.status == 200 or data.status == 304 then
+	
+		local d2 = data.body
+		
+		for k,v in pairs(data.header) do
+			ngx.header[k]=v
+		end
+		
+		if data.header["Content-Type"] then
+			--[[ngx.header['Cache-Control']="max-age=60"]]--
+			if string.find(data.header["Content-Type"],"javascript") then
+				d2=compressjs(d2)
+			elseif string.find(data.header["Content-Type"],"css") then
+                d2=compresscss(d2)
+			end
+		end
+		ngx.say(d2)
+        ngx.eof()
+	end
+else
+	ngx.exec("/proxy");
+end;
